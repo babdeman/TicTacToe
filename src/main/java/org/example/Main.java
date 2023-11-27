@@ -13,6 +13,7 @@ public class Main {
     public static void test1(Game game) throws PlayerWon {
         game.startGame();
         game.placeMarker(0, 1);
+        game.placeMarker(0, 1);
         game.placeMarker(0, 0);
         game.placeMarker(1, 2);
         game.placeMarker(1, 1);
