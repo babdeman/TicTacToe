@@ -61,12 +61,12 @@ public class Game {
         return Marker.empty;
     }
     private Marker checkDiagonal(){
-        if(board[0][0] == Marker.X && board[1][1] == Marker.X && board[2][2] == Marker.X ||
-            board[0][2] == Marker.X && board[1][1] == Marker.X && board[2][0] == Marker.X){
+        if((board[0][0] == Marker.X && board[1][1] == Marker.X && board[2][2] == Marker.X) ||
+                (board[0][2] == Marker.X && board[1][1] == Marker.X && board[2][0] == Marker.X)){
             return Marker.X;
         }
-        if(board[0][0] == Marker.O && board[1][1] == Marker.O && board[2][2] == Marker.O ||
-                board[0][2] == Marker.O && board[1][1] == Marker.O && board[2][0] == Marker.O){
+        if((board[0][0] == Marker.O && board[1][1] == Marker.O && board[2][2] == Marker.O) ||
+                (board[0][2] == Marker.O && board[1][1] == Marker.O && board[2][0] == Marker.O)){
             return Marker.O;
         }
         return Marker.empty;
