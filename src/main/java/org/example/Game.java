@@ -6,6 +6,7 @@ public class Game {
     private final Marker[][] board = new Marker[3][3];
     private boolean gameStarted = false;
     private Marker currentPlayer = Marker.X;
+    private Marker playerWon;
     public boolean startGame(Marker firstPlayer){
         if(gameStarted){
             return false;
@@ -19,6 +20,19 @@ public class Game {
     }
     public boolean startGame(){
         return startGame(Marker.X);
+    }
+    public Marker getCurrentPlayer(){
+        return currentPlayer;
+    }
+    public Marker getWinner(){
+        return playerWon;
+    }
+    public Marker readBoard(int x, int y){
+        return board[y][x];
+    }
+    @Override
+    public String toString(){
+        return Arrays.deepToString(board);
     }
     private void switchPlayer(){
         if(currentPlayer == Marker.X){
@@ -79,6 +93,10 @@ public class Game {
         Marker vertical = checkVertical();
         if(vertical != Marker.empty){
             return vertical;
+        }
+        Marker diagonal = checkDiagonal();
+        if(diagonal != Marker.empty){
+            return diagonal;
         }
         return Marker.empty;
     }
