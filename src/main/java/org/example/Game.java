@@ -3,7 +3,7 @@ package org.example;
 import java.util.Arrays;
 
 public class Game {
-    private Marker[][] board = new Marker[3][3];
+    private final Marker[][] board = new Marker[3][3];
     private boolean gameStarted = false;
     private Marker currentPlayer = Marker.X;
     public boolean startGame(Marker firstPlayer){
@@ -27,6 +27,9 @@ public class Game {
         }
         currentPlayer = Marker.X;
     }
+    private void checkIfWon(){
+
+    }
     public boolean placeMarker(int x, int y){
         if(!gameStarted){
             return false;
@@ -35,6 +38,7 @@ public class Game {
             return false;
         }
         board[x][y] = currentPlayer;
+        checkIfWon();
         switchPlayer();
         return true;
     }
