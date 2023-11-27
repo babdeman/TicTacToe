@@ -27,6 +27,35 @@ public class Game {
         }
         currentPlayer = Marker.X;
     }
+    private boolean isArrayHomogenous(Marker[] markers){
+        Marker first = markers[0];
+        for(int i=1;i< markers.length;i++){
+            if(markers[i] != first){
+                return false;
+            }
+        }
+        return true;
+    }
+    private Marker checkHorizontal(){
+        for(Marker[] markers : board){
+            if(markers[0] != Marker.empty && isArrayHomogenous(markers)){
+                return markers[0];
+            }
+        }
+        return Marker.empty;
+    }
+    private Marker[] makeVertical(Marker[][] markers, int x){
+
+    }
+    private Marker checkVertical(){
+        for(int i=0;i<board[0].length;i++){
+            Marker[] markers = makeVertical(board, i);
+            if(markers[0] != Marker.empty && isArrayHomogenous(markers)){
+                return markers[0];
+            }
+        }
+        return Marker.empty;
+    }
     private void checkIfWon(){
 
     }
@@ -34,10 +63,10 @@ public class Game {
         if(!gameStarted){
             return false;
         }
-        if(board[x][y] != Marker.empty){
+        if(board[y][x] != Marker.empty){
             return false;
         }
-        board[x][y] = currentPlayer;
+        board[y][x] = currentPlayer;
         checkIfWon();
         switchPlayer();
         return true;
