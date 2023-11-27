@@ -45,7 +45,11 @@ public class Game {
         return Marker.empty;
     }
     private Marker[] makeVertical(Marker[][] markers, int x){
-
+        Marker[] vertical = new Marker[markers[0].length];
+        for(int i=0;i<vertical.length;i++){
+            vertical[i] = markers[i][x];
+        }
+        return vertical;
     }
     private Marker checkVertical(){
         for(int i=0;i<board[0].length;i++){
@@ -56,10 +60,29 @@ public class Game {
         }
         return Marker.empty;
     }
-    private void checkIfWon(){
-
+    private Marker checkDiagonal(){
+        if(board[0][0] == Marker.X && board[1][1] == Marker.X && board[2][2] == Marker.X ||
+            board[0][2] == Marker.X && board[1][1] == Marker.X && board[2][0] == Marker.X){
+            return Marker.X;
+        }
+        if(board[0][0] == Marker.O && board[1][1] == Marker.O && board[2][2] == Marker.O ||
+                board[0][2] == Marker.O && board[1][1] == Marker.O && board[2][0] == Marker.O){
+            return Marker.O;
+        }
+        return Marker.empty;
     }
-    public boolean placeMarker(int x, int y){
+    private Marker checkIfWon(){
+        Marker horizontal = checkHorizontal();
+        if(horizontal != Marker.empty){
+            return horizontal;
+        }
+        Marker vertical = checkVertical();
+        if(vertical != Marker.empty){
+            return vertical;
+        }
+        return Marker.empty;
+    }
+    public boolean placeMarker(int x, int y) throws PlayerWon {
         if(!gameStarted){
             return false;
         }
@@ -67,7 +90,11 @@ public class Game {
             return false;
         }
         board[y][x] = currentPlayer;
-        checkIfWon();
+        Marker playerWon = checkIfWon();
+        if(playerWon != Marker.empty){
+            gameStarted = false;
+            throw new PlayerWon(playerWon);
+        }
         switchPlayer();
         return true;
     }
