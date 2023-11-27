@@ -111,6 +111,7 @@ public class Game {
         Marker playerWon = checkIfWon();
         if(playerWon != Marker.empty){
             gameStarted = false;
+            this.playerWon = playerWon;
             throw new PlayerWon(playerWon);
         }
         switchPlayer();
